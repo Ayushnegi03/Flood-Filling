@@ -1,0 +1,40 @@
+//Flood Filling Algorithem in Javasvript
+//Flood fill (also known as seed fill) is an algorithm that determines 
+//the area connected to a given node in a multi-dimensional array.
+function FloodFill(Image, R, C, NewColor){
+    const Current = Image[R][C];
+    if(Current === NewColor){
+        return Image;
+    }
+    fill(Image, R, C, NewColor, Current);
+    return Image;
+};
+const fill = (Image, R, C, NewColor, Current) => {
+    if(R < 0){
+        return;
+    }
+    if(C < 0){
+        return;
+    }
+    if(R > Image.length - 1){
+        return;
+    }
+    if(C > Image[R].length - 1){
+        return;
+    }
+    if(Image[R][C] !== Current){
+        return;
+    }
+     Image[R][C] = NewColor;
+     fill(Image, R - 1, C, NewColor, Current);
+     fill(Image, R + 1, C, NewColor, Current);
+     fill(Image, R, C - 1, NewColor, Current);
+     fill(Image, R, C + 1, NewColor, Current);    
+}
+console.log("Here is Flood Filling:");
+console.log("It is showing the Matrix:");
+console.log(FloodFill([[1,1,1],[1,1,0],[1,0,1]], 0, 1, 2));
+//Output=
+//Here is Flood Filling:
+//It is showing the Matrix:
+//[ [ 2, 2, 2 ], [ 2, 2, 0 ], [ 2, 0, 1 ] ]
