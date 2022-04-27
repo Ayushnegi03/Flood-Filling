@@ -1,0 +1,56 @@
+# FloodFill Algorithem
+Row = [-1, -1, -1, 0, 0, 1, 1, 1]
+Col = [-1, 0, 1, -1, 1, -1, 0, 1]
+
+def isitSafe(matrix,X, Y, target):
+    return 0 <= X < len(matrix) and 0 <= Y < len(matrix[0]) and matrix[X][Y] == target
+def Floodfill(matrix, X, Y, replace):
+    if not matrix or not len(matrix):
+        return
+
+    target = matrix[X][Y]
+
+    if target == replace:
+        return
+ 
+    matrix[X][Y] = replace
+
+    for Z in range(len(Row)):
+        if isitSafe(matrix, X + Row[Z], Y + Col[Z], target):
+            Floodfill(matrix, X + Row[Z], Y + Col[Z], replace) 
+if __name__ == '__main__':
+
+    matrix = [
+            ['Y', 'Y', 'Y', 'X', 'X', 'X', 'X', 'X', 'G', 'G'],
+            ['Y', 'Y', 'Y', 'X', 'X', 'X', 'G', 'X', 'X', 'X'],
+            ['G', 'G', 'G', 'G', 'G', 'X', 'G', 'X', 'X', 'X'],
+            ['W', 'W', 'X', 'X', 'X', 'X', 'G', 'G', 'G', 'X'],
+            ['W', 'R', 'X', 'R', 'X', 'R', 'G', 'X', 'X', 'X'],
+            ['W', 'W', 'X', 'X', 'X', 'G', 'G', 'X', 'X', 'X'],
+            ['W', 'X', 'W', 'R', 'R', 'R', 'R', 'R', 'R', 'X'],
+            ['W', 'B', 'B', 'B', 'B', 'R', 'R', 'X', 'X', 'X'],
+            ['W', 'B', 'B', 'X', 'X', 'X', 'B', 'B', 'X', 'X'],
+            ['W', 'B', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+        ]
+
+    X, Y = (3, 9)   
+
+    replace = 'C'
+
+    Floodfill(matrix, X, Y, replace)
+    print("Here Flood filling Algorithem:")
+    # Print the Colors after Replacement
+    for r in matrix:
+        print(r)
+#Output:
+#Here Flood filling Algorithem:
+#['Y', 'Y', 'Y', 'C', 'C', 'C', 'C', 'C', 'G', 'G']
+#['Y', 'Y', 'Y', 'C', 'C', 'C', 'G', 'C', 'C', 'C']
+#['G', 'G', 'G', 'G', 'G', 'C', 'G', 'C', 'C', 'C']
+#['W', 'W', 'C', 'C', 'C', 'C', 'G', 'G', 'G', 'C']
+#['W', 'R', 'C', 'R', 'C', 'R', 'G', 'C', 'C', 'C']
+#['W', 'W', 'C', 'C', 'C', 'G', 'G', 'C', 'C', 'C']
+#['W', 'C', 'W', 'R', 'R', 'R', 'R', 'R', 'R', 'C']
+#['W', 'B', 'B', 'B', 'B', 'R', 'R', 'C', 'C', 'C']
+#['W', 'B', 'B', 'C', 'C', 'C', 'B', 'B', 'C', 'C']
+#['W', 'B', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C']
