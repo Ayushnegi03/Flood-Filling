@@ -1,0 +1,76 @@
+//Flood fill algorithrem
+//To create a program to Color the current pixel and all the adjacent pixels which have that color.
+#include<iostream>
+using namespace std;
+#define M 8
+#define N 8
+void fillColorAdj(char Screen[][N], int X, int Y, char OldColor, char COLOR)
+{
+   if (X < 0 || X >= M || Y < 0 || Y >= N)
+      return;
+   if (Screen[X][Y] != OldColor)
+      return;
+   if (Screen[X][Y] == COLOR)
+      return;
+   Screen[X][Y] = COLOR;
+   fillColorAdj(Screen, X+1, Y, OldColor, COLOR);
+   fillColorAdj(Screen, X-1, Y, OldColor, COLOR);
+   fillColorAdj(Screen, X, Y+1, OldColor, COLOR);
+   fillColorAdj(Screen, X, Y-1, OldColor, COLOR);
+}
+void fillColor(char Screen[][N], int X, int Y, char COLOR)
+{
+   char OldColor = Screen[X][Y];
+   if(OldColor==COLOR) return;
+   fillColorAdj(Screen, X, Y, OldColor, COLOR);
+}
+int main()
+{
+   char Screen[M][N] = {{'W', 'W', 'B', 'W', 'W', 'W', 'W', 'W'},
+      {'W', 'W', 'W', 'W', 'W', 'W', 'B', 'B'},
+      {'W', 'B', 'B', 'W', 'W', 'B', 'W', 'W'},
+      {'W', 'Y', 'Y', 'Y', 'Y', 'B', 'W', 'B'},
+      {'B', 'W', 'W', 'Y', 'Y', 'B', 'W', 'B'},
+      {'B', 'W', 'W', 'Y', 'Y', 'Y', 'Y', 'B'},
+      {'W', 'B', 'W', 'W', 'W', 'Y', 'W', 'W'},
+      {'W', 'W', 'B', 'B', 'W', 'Y', 'Y', 'W'},};
+   int X = 5, Y = 5;
+   char COLOR = 'R';
+   cout<<"Here is a Flood Fill program\n";
+   cout<<"The Initial screen coordinates are: \n";
+   for (int i=0; i<M; i++){
+      for (int j=0; j<N; j++)
+         cout<<Screen[i][j]<<"\t";
+      cout<<endl;
+   }
+
+   fillColor(Screen, X, Y, COLOR);
+   cout<<"\nThe Screen coordinates after coloring: \n";
+   for (int i=0; i<M; i++)
+   {
+      for (int j=0; j<N; j++)
+         cout<<Screen[i][j]<<"\t";
+      cout<<endl;
+   }
+}
+//Output-
+//Here is a Flood Fill program
+//The Initial screen coordinates are: 
+//W	  W	  B	  W	  W	  W	  W	  W	
+//W	  W	  W	  W	  W	  W	  B	  B	
+//W	  B	  B	  W	  W	  B	  W	  W	
+//W	  Y	  Y	  Y	  Y	  B	  W	  B	
+//B	  W	  W	  Y	  Y	  B	  W	  B	
+//B	  W	  W	  Y	  Y	  Y	  Y	  B	
+//W	  B	  W	  W	  W	  Y	  W	  W	
+//W	  W	  B	  B	  W	  Y	  Y	  W	
+
+//The Screen coordinates after coloring: 
+//W	  W	  B	  W	  W	  W	  W	  W	
+//W	  W	  W	  W	  W	  W	  B	  B	
+//W	  B	  B	  W	  W	  B	  W	  W	
+//W	  R	  R	  R	  R	  B	  W	  B	
+//B	  W	  W	  R	  R	  B	  W	  B	
+//B	  W	  W	  R	  R	  R	  R	  B	
+//W	  B	  W	  W	  W	  R	  W	  W	
+//W	  W	  B	  B	  W	  R	  R	  W	
