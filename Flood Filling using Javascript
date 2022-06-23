@@ -34,7 +34,7 @@ const fill = (Image, R, C, NewColor, Current) => {
 console.log("Here is Flood Filling:");
 console.log("It is showing the Matrix:");
 console.log(FloodFill([[1,1,1],[1,1,0],[1,0,1]], 0, 1, 2));
-//Output=
+//Output=>
 //Here is Flood Filling:
 //It is showing the Matrix:
 //[ [ 2, 2, 2 ], [ 2, 2, 0 ], [ 2, 0, 1 ] ]
